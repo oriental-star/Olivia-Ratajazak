@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Language = 'de' | 'en';
 
@@ -64,7 +64,10 @@ const content = {
 };
 
 export default function ProjectDocumentation() {
-  const [lang, setLang] = useState<Language>('de');
+  const [lang, setLang] = useState<Language>('en');
+  useEffect(() => {
+    setLang(navigator.language.toLowerCase().startsWith('de') ? 'de' : 'en');
+  }, []);
   const t = content[lang];
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
